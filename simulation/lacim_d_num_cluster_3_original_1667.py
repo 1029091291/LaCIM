@@ -81,8 +81,8 @@ while i<5:
         z_ivae_list = []
         s_ivae_list = []
         for k in range(4000):
-            if k %500 == 0 and k > 0:
-                print('k', k, 'j', j, 'i', i)
+            # if k %500 == 0 and k > 0:
+            #     print('k', k, 'j', j, 'i', i)
             x,y,s,z,_,c = next(iter(train_loader))
             x,y,s,z,c = x.to(device),y.to(device),s.to(device),z.to(device),c.to(device)
             model_ivae.zero_grad()
@@ -148,5 +148,17 @@ while i<5:
             's_ivae_list_data_discrete_3':s_ivae_list_data_discrete_3,
             'hist_ivae_perf_z_data_discrete_3':hist_ivae_perf_z_data_discrete_3,
             'hist_ivae_perf_s_data_discrete_3':hist_ivae_perf_s_data_discrete_3
+        }
+        pickle.dump(dicts, f)
+    with open(path[:-6]+'_%s'%(os.path.basename(__file__)[:-3]) + '/z_ivae_list_data_discrete_3.pkl', 'wb') as f:
+        dicts = {
+            'i':i, 'j':j, 'k':k,
+            'z_ivae_list_data_discrete_3':z_ivae_list_data_discrete_3
+        }
+        pickle.dump(dicts, f)
+    with open(path[:-6] + '_%s' % (os.path.basename(__file__)[:-3]) + '/s_ivae_list_data_discrete_3.pkl', 'wb') as f:
+        dicts = {
+            'i': i, 'j': j, 'k': k,
+            's_ivae_list_data_discrete_3':s_ivae_list_data_discrete_3
         }
         pickle.dump(dicts, f)
